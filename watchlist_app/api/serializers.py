@@ -1,12 +1,21 @@
 from rest_framework import serializers
-from watchlist_app.models import WatchList, StreamPlatform
+from watchlist_app.models import WatchList, StreamPlatform, Review
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+     
+     class Meta:
+          model = Review
+          fields = "__all__"
 
 
 class WatchListSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True, read_only=True)
 
     class Meta:
         model = WatchList
         fields = "__all__"
+
 
 class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
         watchlist = WatchListSerializer(many=True, read_only=True)
@@ -22,10 +31,15 @@ class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
             model = StreamPlatform
             fields = "__all__"
 
+
+
         def build_url_field(self, field_name, model_class):
             field_class = self.serializer_url_field
             field_kwargs = {"view_name": 'stream-detail'}
             return field_class, field_kwargs
+        
+
+
 
           
 # def name_length(value): # 2
