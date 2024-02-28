@@ -3,6 +3,7 @@ from rest_framework.response import Response
 # from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import generics
+<<<<<<< Updated upstream
 from rest_framework import mixins
 
 
@@ -28,6 +29,44 @@ class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generi
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+=======
+# from rest_framework import mixins
+
+
+from watchlist_app.models import WatchList, StreamPlatform, Review
+from watchlist_app.api.serializers import (WatchListSerializer, StreamPlatformSerializer, 
+                                           ReviewSerializer)
+
+
+class ReviewList(generics.ListCreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+
+class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+
+# class ReviewDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
+#     queryset = Review.objects.all()
+#     serializer_class = ReviewSerializer
+
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args, **kwargs)
+
+
+
+# class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+#     queryset = Review.objects.all()
+#     serializer_class = ReviewSerializer
+
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+>>>>>>> Stashed changes
     
 
 class StreamPlatformAV(APIView):
