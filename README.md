@@ -7,4 +7,4 @@
     c. validator passed as an argument
 
 # Start From
-5. 19. Viewsets
+5. 19. Viewsets ==> 4:52
