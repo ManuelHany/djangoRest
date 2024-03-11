@@ -123,7 +123,7 @@ menv/
 media/
 media_email/
 *.pyc
-*.db
+# *.db
 *.pid
 
 # Ignore Django Migrations in Development if you are working on team
