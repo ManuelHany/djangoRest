@@ -26,7 +26,8 @@
 
 5- Authentication Types:
 - Basic authentication
-- token authentication
+- token authentication: you can generate token automatically by either loading the models in views and get the token or use the built in get_or_create token method.
+- 
 
 # Start From
 5. 19. Viewsets ==> 4:52
