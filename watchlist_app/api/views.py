@@ -85,6 +85,8 @@ class StreamPlarformVS(viewsets.ViewSet):
     """
     A simple view set for listing or retrieving users.
     """
+    permission_classes = [IsAdminOrReadOnly]
+
     def list(self, request):
         queryset = StreamPlatform.objects.all()
         serializer = StreamPlatformSerializer(queryset, many=True, context= {"request": request})

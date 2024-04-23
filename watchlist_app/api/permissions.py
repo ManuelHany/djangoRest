@@ -6,10 +6,12 @@ class IsAdminOrReadOnly(permissions.IsAdminUser):
         # # if we have a logged in user and the user is staff or if the request is Get
         # admin_permission = bool(request.user and request.user.is_staff)
         # return request.method == "GET" or admin_permission
+        print(f"user ==> {request.user}")
         if request.method in permissions.SAFE_METHODS:
             return True
         else:
             return bool(request.user and request.user.is_staff)
+
 
 
 class IsReviewUserOrReadOnly(permissions.BasePermission):
@@ -20,4 +22,4 @@ class IsReviewUserOrReadOnly(permissions.BasePermission):
             return True
         else:
             # Check permissions for write request
-            return obj.review_user == request.user
+            return obj.review_user == request.user or request.user.is_staff
