@@ -27,7 +27,19 @@
 5- Authentication Types:
 - Basic authentication
 - token authentication: you can generate token automatically by either loading the models in views and get the token or use the built in get_or_create token method.
-- 
+
+6- JWT:
+Access Token and refresh token are generated automatically. 
+AT is for 5 min and RT is for 24 hour. No need for a table named tokens in our database.
+both tokens are stored locally on client side. 
+
+the JWT token consists of 3 parts:
+- part1: header
+- part2: payload
+- part3: signature which includes info about how this token is encoded
+
+Usage:
+usage is mainly through post man or terminal can't be from django admin. 
 
 # Start From
 5. 19. Viewsets ==> 4:52
