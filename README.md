@@ -43,7 +43,11 @@ usage is mainly through post man or terminal can't be from django admin.
 
 7- Throttling:
 - there are authenticated and anonymous user types restrictions 
-- the requests are counted together 
+- the requests are counted together if used in general settings
+- advantages of using scopedThrottle is that you don't need to write a separate python file for scoping
+- and you can combine a combination such as the following: 100/day requests but maximum 1/second
+
+8- 
 
 # Start From
 5. 19. Viewsets ==> 4:52
