@@ -25,8 +25,20 @@ class UserReview(generics.ListAPIView):
     # throttle_classes = [ScopedRateThrottle]
     # throttle_scope = 'review-detail'
 
+    # def get_queryset(self):
+    #     """
+    #         This is the Second Filter Method
+    #         We are mapping the value of username instead of the number of it
+    #     """
+    #     username = self.kwargs['username']
+    #     return Review.objects.filter(review_user__username=username) # because review user is a foreign key I have to ecplain what does this FK mean for you.
+
     def get_queryset(self):
-        username = self.kwargs['username']
+        """
+            This is the Third Filter Method
+            instead of directly mapping the value we are mapping the parameter
+        """
+        username = self.request.query_params.get('username', None)
         return Review.objects.filter(review_user__username=username) # because review user is a foreign key I have to ecplain what does this FK mean for you.
 
 class ReviewCreate(generics.CreateAPIView):

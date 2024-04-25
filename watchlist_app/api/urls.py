@@ -25,5 +25,6 @@ urlpatterns = [
     path('<int:pk>/reviews/', ReviewList.as_view(), name='stream-detail'),
     path('review/<int:pk>/', ReviewDetail.as_view(), name='review-detail'),
 
-    path('reviews/<str:username>/', UserReview.as_view(), name='user-review-detail')
+    # path('reviews/<str:username>/', UserReview.as_view(), name='user-review-detail')
+    path('reviews/', UserReview.as_view(), name='user-review-detail')
 ]
