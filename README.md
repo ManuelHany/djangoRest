@@ -47,7 +47,8 @@ usage is mainly through post man or terminal can't be from django admin.
 - advantages of using scopedThrottle is that you don't need to write a separate python file for scoping
 - and you can combine a combination such as the following: 100/day requests but maximum 1/second
 
-8- 
+8- Filtering:
+- We have 3 types of filters, direct filter, searching and ordering.
 
 # Start From
 5. 19. Viewsets ==> 4:52

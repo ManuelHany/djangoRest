@@ -18,6 +18,17 @@ from watchlist_app.api.serializers import (WatchListSerializer, StreamPlatformSe
 from watchlist_app.api.throttling import ReviewCreateThrottle, ReviewListThrottle
 
 
+class UserReview(generics.ListAPIView):
+    # queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    # permission_classes = [IsAuthenticated]
+    # throttle_classes = [ScopedRateThrottle]
+    # throttle_scope = 'review-detail'
+
+    def get_queryset(self):
+        username = self.kwargs['username']
+        return Review.objects.filter(review_user__username=username) # because review user is a foreign key I have to ecplain what does this FK mean for you.
+
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
