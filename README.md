@@ -41,5 +41,9 @@ the JWT token consists of 3 parts:
 Usage:
 usage is mainly through post man or terminal can't be from django admin. 
 
+7- Throttling:
+- there are authenticated and anonymous user types restrictions 
+- the requests are counted together 
+
 # Start From
 5. 19. Viewsets ==> 4:52
