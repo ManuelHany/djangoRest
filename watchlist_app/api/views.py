@@ -9,6 +9,7 @@ from rest_framework import viewsets
 from rest_framework.validators import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadOnly
@@ -77,8 +78,10 @@ class ReviewList(generics.ListAPIView):
     # queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     # permission_classes = [IsAuthenticated]
-    throttle_classes = [ScopedRateThrottle]
-    throttle_scope = 'review-detail'
+    # throttle_classes = [ScopedRateThrottle]
+    # throttle_scope = 'review-detail'
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['review_user__username', 'active']
 
     def get_queryset(self):
         pk = self.kwargs['pk']
@@ -184,6 +187,13 @@ class StreamPlatformDetailAV(APIView):
         stream_platform = StreamPlatform.objects.get(pk=pk)
         stream_platform.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class WatchList(generics.ListAPIView):
+    queryset = WatchList.objects.all()
+    serializer_class = WatchListSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['title', 'platform__name']
 
 
 class WatchListAV(APIView):
