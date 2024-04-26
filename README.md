@@ -49,6 +49,9 @@ usage is mainly through post man or terminal can't be from django admin.
 
 8- Filtering:
 - We have 3 types of filters, direct filter, searching and ordering.
+- Direct filter is mainly for exact matches with keyword, while search can be more elastic depends on criteria:
+- ![img.png](img.png)
+- 
 
 # Start From
 5. 19. Viewsets ==> 4:52
