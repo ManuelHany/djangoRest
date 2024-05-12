@@ -54,4 +54,4 @@ usage is mainly through post man or terminal can't be from django admin.
 - 
 
 # Start From
-5. 19. Viewsets ==> 4:52
+16 ==> Automated API Testing
