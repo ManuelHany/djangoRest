@@ -192,7 +192,7 @@ class StreamPlatformDetailAV(APIView):
 
 
 class WatchListGV(generics.ListAPIView):
-    queryset = WatchList.objects.all()
+    queryset = WatchList.objects.select_related('platform').all()
     serializer_class = WatchListSerializer
     pagination_class = WatchListCPagination
 
