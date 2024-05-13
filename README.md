@@ -51,6 +51,20 @@ usage is mainly through post man or terminal can't be from django admin.
 - We have 3 types of filters, direct filter, searching and ordering.
 - Direct filter is mainly for exact matches with keyword, while search can be more elastic depends on criteria:
 - ![img.png](img.png)
+
+9- Pagination:
+- Page Pagination
+- Offset Limit Pagination 
+- Cursor Pagination
+They are all translated to limit and offset at the end.
+
+Silk:
+- Silk is one of the best tools that could be used to trace the query that hit the database. 
+- Here we used select related in the foreign key to join 2 tables and avoid the n+1 queries.
+
+10- Testing:
+- Any test written should start with the keyword "test_"
+- all the testcases are created in a separate database. 
 - 
 
 # Start From
