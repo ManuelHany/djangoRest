@@ -8,7 +8,7 @@
 
 2- Permission access:
 - Active: Meaning that the user us authenticated and can log in to application but not admin panel.
-- Staff: Meaning the the user can log in to the admin panel also. 
+- Staff: Meaning the user can log in to the admin panel also. 
 - Superuser: Meaning that the user can do any action in the admin panel this of course can be limited through permissions.
 
 3- Permission Combinations:
@@ -68,4 +68,5 @@ Silk:
 - Read about Signalss!!!!
 
 # Start From
-16 ==> Automated API Testing
+implement the delete method for the stream platform router
+16 ==> 66. API testing - ReviewTestCase
