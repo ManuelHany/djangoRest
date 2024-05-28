@@ -153,6 +153,13 @@ class StreamPlarformVS(viewsets.ViewSet):
         else:
             return Response(serializer.errors)
 
+    # def delete(self, request, pk=None):
+    #     stream_platform = StreamPlatform.objects.get(pk=pk)
+    #     serializer = StreamPlatformSerializer(stream_platform, context={'request': request})
+    #     if serializer.is_valid():
+    #         serializer.delete()
+
+
 
 class StreamPlatformAV(APIView):
     permission_classes = [IsAdminOrReadOnly]
