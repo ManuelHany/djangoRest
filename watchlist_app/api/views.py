@@ -60,7 +60,7 @@ class ReviewCreate(generics.CreateAPIView):
         review_user = self.request.user
         review_queryset = Review.objects.filter(watchlist=watchlist, review_user=review_user)
 
-        print(review_queryset.exists())
+        # print(review_queryset.exists())
         if review_queryset.exists():
             raise ValidationError("You have already reviewed this movie!")
 
@@ -143,6 +143,13 @@ class StreamPlarformVS(viewsets.ViewSet):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def destroy(self, request, pk=None):
+        stream_platform = StreamPlatform.objects.get(pk=pk)
+        stream_platform.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
     
     def create(self, request):

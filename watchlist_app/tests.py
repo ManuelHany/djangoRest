@@ -66,13 +66,12 @@ class StreamPlatformTestCase(APITestCase):
         response = self.client.put(self.details_url, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    # def test_stream_platform_delete_admin(self):
-    #     platform_id = self.stream.id
-    #     self.token = self.token = Token.objects.get(user__username=self.admin_user)
-    #     self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
-    #     print(f"platform: {self.stream}\nid: {platform_id}")
-    #     response = self.client.delete(self.details_url, args=(platform_id,))
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    def test_stream_platform_delete_admin(self):
+        platform_id = self.stream.id
+        self.token = self.token = Token.objects.get(user__username=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+        response = self.client.delete(self.details_url, args=(platform_id,))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
 
 class WatchListTestCase(APITestCase):
