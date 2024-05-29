@@ -119,6 +119,10 @@ class ReviewTestCase(APITestCase):
                                                            website="https://Netflix.com")
         self.watchlist = models.WatchList.objects.create(platform=self.stream, title="Example Movie",
                                                          storyline="Example Movie", active=True)
+        self.watchlist2 = models.WatchList.objects.create(platform=self.stream, title="Example Movie",
+                                                         storyline="Example Movie", active=True)
+        self.review = models.Review.objects.create(review_user=self.user, rating=5, description="Great Movie",
+                                                   watchlist=self.watchlist2, active=True)
 
     def test_review_create(self):
         data = {
@@ -131,6 +135,37 @@ class ReviewTestCase(APITestCase):
 
         response = self.client.post(reverse('review-create', args=(self.watchlist.id,)), data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(models.Review.objects.count(), 2)
+        # self.assertEqual(models.Review.objects.get().rating, 5)
+
 
         response = self.client.post(reverse('review-create', args=(self.watchlist.id,)), data)
         self.assertIn(response.status_code, [status.HTTP_400_BAD_REQUEST, status.HTTP_429_TOO_MANY_REQUESTS])
+
+
+    def test_review_create_unauth(self):
+        data = {
+            "review_user": self.user,
+            "rating": 5,
+            "description": "Great Movie!",
+            "watchlist": self.watchlist,
+            "active": True
+        }
+
+        self.client.force_authenticate(user=None)
+        response = self.client.get(reverse('review-create', args=(self.watchlist.id,)), data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+    def test_review_update(self):
+        data = {
+            "review_user": self.user,
+            "rating": 4,
+            "description": "Great Movie! - Updated",
+            "watchlist": self.watchlist,
+            "active": False
+        }
+        response = self.client.put(reverse('review-detail', args=(self.review.id,)), data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
