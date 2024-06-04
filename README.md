@@ -66,7 +66,9 @@ Silk:
 - Any test written should start with the keyword "test_"
 - all the testcases are created in a separate database. 
 - Read about Signalss!!!!
-
+- in the TDD, test driven development or test first development we can actually write our
+models, and then our tescases afterwards as they are not dependant on views and serializers.
+this is the test driven development. 
 # Start From
-implement the delete method for the stream platform router
-16 ==> 66. API testing - ReviewTestCase start from moment 6
+to mousa --> how to force a test case to run at last? 
+to mousa --> why should I always have to add "details_url" in the setup to be able to delete?

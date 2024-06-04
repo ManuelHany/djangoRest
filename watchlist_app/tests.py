@@ -124,6 +124,7 @@ class ReviewTestCase(APITestCase):
         self.review = models.Review.objects.create(review_user=self.user, rating=5, description="Great Movie",
                                                    watchlist=self.watchlist2, active=True)
 
+
     def test_review_create(self):
         data = {
             "review_user": self.user,
@@ -167,5 +168,31 @@ class ReviewTestCase(APITestCase):
         }
         response = self.client.put(reverse('review-detail', args=(self.review.id,)), data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    
+    def test_review_list(self):
+        response = self.client.get(reverse('review-list', args=(self.watchlist.id,)))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+    def test_review_individual(self):
+        response = self.client.get(reverse('review-detail', args=(self.review.id,)))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_review_delete(self):
+        user = User.objects.create_user(username="example2", password="Password@123")
+        review = models.Review.objects.create(review_user=user, rating=4, description="new Movie",
+                                              watchlist=self.watchlist2, active=True)
+        review_id = review.id
+        token = Token.objects.get(user__username=user)
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+        details_url = reverse('review-detail', args=[review_id])
+        response = self.client.delete(details_url, args=(review_id,))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_review_user(self):
+        response = self.client.get('/watch/reviews/?username' + self.user.username)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
 
 
