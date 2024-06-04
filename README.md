@@ -69,6 +69,7 @@ Silk:
 - in the TDD, test driven development or test first development we can actually write our
 models, and then our tescases afterwards as they are not dependant on views and serializers.
 this is the test driven development. 
-# Start From
+# Start From -> Code Cleanup
 to mousa --> how to force a test case to run at last? 
-to mousa --> why should I always have to add "details_url" in the setup to be able to delete?
+ans. you create a new review inside the delete test method itself and delete it in there
+
