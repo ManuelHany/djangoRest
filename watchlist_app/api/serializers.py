@@ -36,7 +36,7 @@ class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
 
         def build_url_field(self, field_name, model_class):
             field_class = self.serializer_url_field
-            field_kwargs = {"view_name": 'stream-detail'}
+            field_kwargs = {"view_name": 'streamplatform-detail'}
             return field_class, field_kwargs
         
 
