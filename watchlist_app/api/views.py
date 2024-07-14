@@ -5,31 +5,19 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.throttling import ScopedRateThrottle
+from rest_framework.throttling import ScopedRateThrottle, AnonRateThrottle
 from rest_framework.validators import ValidationError
 from rest_framework.views import APIView
 
 from watchlist_app.api import serializers
 from watchlist_app.api.pagination import WatchListCPagination
 from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadOnly
-from watchlist_app.api.throttling import ReviewCreateThrottle
+from watchlist_app.api.throttling import ReviewCreateThrottle, ReviewListThrottle
 from watchlist_app.models import WatchList, StreamPlatform, Review
 
 
 class UserReview(generics.ListAPIView):
-    # queryset = Review.objects.all()
     serializer_class = serializers.ReviewSerializer
-    # permission_classes = [IsAuthenticated]
-    # throttle_classes = [ScopedRateThrottle]
-    # throttle_scope = 'review-detail'
-
-    # def get_queryset(self):
-    #     """
-    #         This is the Second Filter Method
-    #         We are mapping the value of username instead of the number of it
-    #     """
-    #     username = self.kwargs['username']
-    #     return Review.objects.filter(review_user__username=username) # because review user is a foreign key I have to ecplain what does this FK mean for you.
 
     def get_queryset(self):
         """
@@ -72,10 +60,8 @@ class ReviewCreate(generics.CreateAPIView):
 
 
 class ReviewList(generics.ListAPIView):
-    # queryset = Review.objects.all()
     serializer_class = serializers.ReviewSerializer
-    # permission_classes = [IsAuthenticated]
-    # throttle_classes = [ScopedRateThrottle]
+    throttle_classes = [ReviewListThrottle, AnonRateThrottle]
     # throttle_scope = 'review-detail'
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['review_user__username', 'active']

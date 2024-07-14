@@ -19,8 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('dashboard/', admin.site.urls),
-    path('watch/', include('watchlist_app.api.urls')),
-    path('account/', include('user_app.api.urls')),
+    path('api/watch/', include('watchlist_app.api.urls')),
+    path('api/account/', include('user_app.api.urls')),
     path('silk/', include('silk.urls', namespace='silk'))
 
     # path('api-auth/', include('rest_framework.urls')),
